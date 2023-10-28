@@ -28,7 +28,21 @@ public class Dessert {
         this.createDate = dataDessert[7];
     }
 
-    
+    public int getId(){
+        return this.dessertId;
+    }
+
+    public String getName(){
+        return this.dessertName;
+    }
+
+    public int getStockDessert(){
+        return this.stockDessert;
+    }
+
+    public int getPrice(){
+        return this.price;
+    }
 
     private Material[] setUpArrayMaterials(String materialsString) {
         String[] idMaterials2 = materialsString.split(",");
@@ -40,7 +54,7 @@ public class Dessert {
         return Array;
     }
 
-    static void fetchAllMenuDessert(){
+    static void getListItemDessert(){
         for(int i=0;i<dataArrayDessert.length;i++){
                 System.out.print("ID: "+dataArrayDessert[i][0]+", Name: "+dataArrayDessert[i][1]+", Price: "+dataArrayDessert[i][3]+", Stock: "+dataArrayDessert[i][4]+
                 ", Expiration Date: "+dataArrayDessert[i][6]);

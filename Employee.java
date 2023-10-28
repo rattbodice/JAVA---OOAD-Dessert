@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Employee extends User {
     private static int salary;
@@ -109,20 +110,32 @@ public class Employee extends User {
     /////////////// function dessert mode
 
     private static void sellDessert() {
-        try {
-            
-            System.out.println(
-                    "--------------------------------------------------------------------------------------------------------------");
+        
+            int[] orderId = new int[10];
+            Dessert[] desserOrder = new Dessert[10];
+            int[] amountDessertOrder = new int[10];
+            int amountSelect = 0;
             Scanner scanner = new Scanner(System.in);
             Dessert dessert = new Dessert();
-            dessert.fetchAllMenuDessert();
+        
             while (true) {
+                System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+                dessert.getListItemDessert();
                 System.out.println();
                 System.out.print("Please select ID dessert :");
                 int choice = scanner.nextInt();
-                System.out.println("-----------------------------------------------------------------------------------------------");
+                System.out.print("Please input amount of Dessert :");
+                int amount = scanner.nextInt();
+                orderId[amountSelect] = choice;
+                amountDessertOrder[amountSelect] = amount;
+                amountSelect++;
+                System.out.println("--------------------------------------------------------------------------------------------------------------");
                 System.out.println("Your Order |V|");
-                
+                for(int i=0;i<amountSelect;i++){
+                    desserOrder[i] = new Dessert(orderId[i]);
+                    System.out.println("Order " +(i+1)+" | ID: "+desserOrder[i].getId()+", Name: "+desserOrder[i].getName()+", Price: "+desserOrder[i].getPrice()+" Bath"+", Amount : "+amountDessertOrder[i]);
+                }
                 System.out.println("1 : Have more");
                 System.out.println("2 : Check Bill");
                 System.out.println("3 : Exit");
@@ -133,7 +146,7 @@ public class Employee extends User {
                     case 1:
                     continue;
                     case 2:
-                        
+                        checkBill(desserOrder, orderId, amountSelect);
                         break;
                     case 3:
                         System.out.println("Exiting...");
@@ -143,14 +156,26 @@ public class Employee extends User {
                 }
             }
 
-        } catch (Exception e) {
-            System.out.println("SQL DESSERT ERROR");
-        }
+        
 
     }
 
-    private static void checkBill(int[] idDesserts,int countSelect) {
+    private static void checkBill(Dessert[] orderDessert,int[] amountOrderDessert,int amountSelect) {
+        int sumprice=0;
+        int allamount=0;
 
+        for(int i = 0 ; i< amountSelect ; i++){
+            sumprice = sumprice+(orderDessert[i].getPrice()*amountOrderDessert[i]);
+            allamount = allamount+amountOrderDessert[i];
+        }
+        Date currentDate = new Date();
+
+        System.out.println("--------------------------------------------------------------------------------------------------------------");
+        System.out.println("Bill : "+currentDate);
+        for (int i = 0; i < amountSelect; i++) {
+            System.out.println((i+1)+". "+orderDessert[i].dessertName+"   "+orderDessert[i].price+" Bath"+"   Amount "+amountOrderDessert[i]);
+            
+        }
     }
 
     // private static String generateMaterials(String materialsDessert){

@@ -4,7 +4,10 @@ public class Material {
     int stockMaterial;
     String createDate;
 
-    String[][] dataMaterials = {{"0","Coconut Milk","5","2023-10-10"}};
+    String[][] dataMaterials = {
+        {"0","Coconut Milk","5","2023-10-10"},
+        {"1","Panda Leaf","5","2023-10-10"}
+};
     
 
     Material(int idMaterials){
