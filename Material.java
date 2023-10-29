@@ -18,5 +18,9 @@ public class Material {
         this.createDate = material[3];
     }
 
+    Material(){
+        
+    }
+
     
 }

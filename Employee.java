@@ -15,6 +15,9 @@ public class Employee extends User {
     public static void modeEmployee() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
             System.out.println("-------------------------------------------------------");
             System.out.println("Menu:");
             System.out.println("1. Dessert");
@@ -60,6 +63,9 @@ public class Employee extends User {
 
     private static void toDessertMode() {
         while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
             Scanner scanner = new Scanner(System.in);
             System.out.println(
                     "--------------------------------------------------------------------------------------------------------------");
@@ -69,11 +75,12 @@ public class Employee extends User {
             System.out.println("3. Edit Dessert");
             System.out.println("4. Delete Dessert");
             System.out.println("5. Exit");
+            System.out.println();
             System.out.print("Select an option: ");
 
-            int choice = scanner.nextInt();
+            int choiceMenu = scanner.nextInt();
 
-            switch (choice) {
+            switch (choiceMenu) {
                 case 1:
                     sellDessert();
                     break;
@@ -119,8 +126,12 @@ public class Employee extends User {
         Dessert dessert = new Dessert();
 
         while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
             System.out.println(
                     "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Selling Dessert");
             dessert.getListItemDessert();
             System.out.println();
             System.out.print("Please select ID dessert :");
@@ -130,6 +141,11 @@ public class Employee extends User {
             orderId[amountSelect] = choice;
             amountDessertOrder[amountSelect] = amount;
             amountSelect++;
+
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
+
             System.out.println(
                     "--------------------------------------------------------------------------------------------------------------");
             System.out.println("Your Order |V|");
@@ -139,6 +155,7 @@ public class Employee extends User {
                         + desserOrder[i].getName() + ", Price: " + desserOrder[i].getPrice() + " Bath" + ", Amount : "
                         + amountDessertOrder[i]);
             }
+            System.out.println();
             System.out.println("1 : Have more");
             System.out.println("2 : Check Bill");
             System.out.println("3 : Exit");
@@ -173,6 +190,9 @@ public class Employee extends User {
         Date currentDate = new Date();
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
             System.out.println(
                     "--------------------------------------------------------------------------------------------------------------");
             System.out.println("Bill : " + currentDate);
@@ -196,31 +216,124 @@ public class Employee extends User {
                     System.out.println("Invalid option. Please try again.");
             }
             Order order = new Order();
-            int mostId = Integer.parseInt(order.dataOrder[order.dataOrder.length-1][0]);
+            int mostId = Integer.parseInt(order.dataOrder[order.dataOrder.length - 1][0]);
             String orderToString;
-            //// generate String Array to String  88 is Offline
-            orderToString = ""+mostId+","+"88"+",";
-            for(int i=0;i<amountSelect;i++){
-                if (i!=0) {
-                    orderToString = orderToString +"|";
+            //// generate String Array to String 88 is Offline
+            orderToString = "" + mostId + "," + "88" + ",";
+            for (int i = 0; i < amountSelect; i++) {
+                if (i != 0) {
+                    orderToString = orderToString + "|";
                 }
-                orderToString = orderToString + orderDessert[i].dessertId+":"+amountOrderDessert[i];
+                orderToString = orderToString + orderDessert[i].dessertId + ":" + amountOrderDessert[i];
             }
-            orderToString = orderToString+","+"Front Shop"+","+sumprice+","+"Offline";
+            orderToString = orderToString + "," + "Front Shop" + "," + sumprice + "," + "Offline";
             order.addListOrder(orderToString);
 
             return;
-        //     int mostId = Integer.parseInt(order.dataOrder[order.dataOrder.length-1][0]);
-        // System.out.println("************************************************************************************************************");
-        // System.out.println("Date : "+currentDate.toString());
-        // System.out.println("Purchase : "+(mostId+1));
-    
+            // int mostId = Integer.parseInt(order.dataOrder[order.dataOrder.length-1][0]);
+            // System.out.println("************************************************************************************************************");
+            // System.out.println("Date : "+currentDate.toString());
+            // System.out.println("Purchase : "+(mostId+1));
+
         }
-        
+
     }
-    
 
     private static void addDessert() {
+        Scanner scanner = new Scanner(System.in);
+
+        String dessertName, dessertDes, dessertPrice, dessertStock, dessertMat = "", dessertExpi;
+        Material mat = new Material();
+        String[][] dataMaterials = mat.dataMaterials;
+        int[] stockIdSelect = new int[10];
+        int countSelect = 0;
+        Dessert dessert = new Dessert();
+        String mostId = dessert.dataArrayDessert[dessert.dataArrayDessert.length-1][0];
+
+
+        while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
+            System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Add Dessert");
+            System.out.print("Dessert Name : ");
+            dessertName = scanner.nextLine();
+            System.out.print("Dessert Description : ");
+            dessertDes = scanner.nextLine();
+            System.out.print(" Dessert Price : ");
+            dessertPrice = scanner.nextLine();
+            System.out.print("Dessert Expiration Date (Example | yyyy-mm-dd): ");
+            dessertExpi = scanner.nextLine();
+            System.out.print("Dessert Stock : ");
+            dessertStock = scanner.nextLine();
+            System.out.println("Materials of Dessert");
+            int choice=99;
+            while (true) {
+                for (int i = 0; i < dataMaterials.length; i++) {
+
+                    System.out.print("ID : " + dataMaterials[i][0]);
+                    System.out.print(" , Name : " + dataMaterials[i][1]);
+                    System.out.print(" , Stock : " + dataMaterials[i][2]);
+
+                    System.out.println();
+                }
+                System.out.println();
+                try {
+                    System.out.print("Please input ID of Material : ");
+                    if (choice != 99){
+                        dessertMat+=":";
+                    } 
+                    choice = scanner.nextInt();
+                    
+                    stockIdSelect[countSelect] = choice;
+                    dessertMat += choice;
+                    
+                    countSelect++;
+                    
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Please enter a valid ID."+e);
+                }
+                System.out.println("----------------------------------");
+                System.out.print("Dessert Materials : ");
+
+                for (int j = 0; j < countSelect; j++) {
+                    for (int k = 0; k < dataMaterials.length; k++) {
+                        if (Integer.parseInt(dataMaterials[k][0]) == stockIdSelect[j]) {
+                            if (j != 0) {
+                                System.out.print(",");
+                            }
+                            System.out.print(dataMaterials[k][1]);
+
+                        }
+                    }
+
+
+                }
+
+                System.out.println("\n1 : Have more");
+                System.out.println("2 : Complete");
+                System.out.print("Select an option:");
+                int choice2 = scanner.nextInt();
+
+                switch (choice2) {
+                    case 1:
+                        dessertMat += ":";
+                        continue;
+                    case 2:
+                        String[] newDessert = {mostId,dessertName,dessertDes,dessertPrice,dessertStock,dessertMat,dessertExpi,dessertExpi};
+                        Dessert.addDessert(newDessert);
+                        return;
+
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+                
+
+            }
+
+        }
 
     }
 

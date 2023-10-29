@@ -1,7 +1,8 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.*; 
-import java.util.Arrays; 
+import java.util.Arrays;
+import java.util.Scanner; 
 
 public class Receipt {
     int receiptId;
@@ -11,6 +12,7 @@ public class Receipt {
     Employee doBy;
     String createDate;
     Clients clientId;
+    
 
     static String[][] dataReceipt = {{"0","0:2|0:1","75","Client","Employee","2022-10-10","0"}};
 
@@ -30,13 +32,18 @@ public class Receipt {
 
     public static void printReceipt(){
         String[] arr = dataReceipt[dataReceipt.length-1];
-        // System.out.println(Arrays.toString(arr));
-        System.out.println("**************************************************************************************************************");
-        System.out.println("Date : "+arr[5]);
-        System.out.println("Purchase ID : "+arr[0]);
-        System.out.println("**************************************************************************************************************");
+        Scanner scanner = new Scanner(System.in);
+        
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+
+        System.out.println("*****************************************");
+        System.out.println("      Date : "+arr[5]);
+        System.out.println("      Purchase ID : "+arr[0]);
+        System.out.println("*****************************************");
         String[] orderAmount = arr[1].split("\\|");
-        System.out.println(Arrays.toString(orderAmount));
+        // System.out.println(Arrays.toString(orderAmount));
         int sumprice = 0; 
         for (int i = 0; i < orderAmount.length; i++) {
            String[] orderAmountInt =  orderAmount[i].split(":");
@@ -45,19 +52,22 @@ public class Receipt {
            sumprice += dessert.price*amount;
            System.out.println((i+1)+". "+dessert.dessertName+" Amount: "+amount+" Price: "+(dessert.price*amount));
         }
-        System.out.println("**************************************************************************************************************");
-        System.out.println("Sub Total : "+sumprice);
-        System.out.println("Tex       : 0");
-        System.out.println("Order Total :"+sumprice);
-        System.out.println("**************************************************************************************************************");
+        System.out.println("*****************************************");
+        System.out.println("      Sub Total : "+sumprice);
+        System.out.println("      Tex       : 0");
+        System.out.println("      Order Total :"+sumprice);
+        System.out.println("*****************************************");
+        System.out.print("Press Enter to continue...");
+        scanner.nextLine(); // Wait for the user to press Enter
     }
 
     private static void printReceipt(int receiptId){
         String[] arr = dataReceipt[receiptId];
-        System.out.println("**************************************************************************************************************");
-        System.out.println("Date : "+arr[5]);
-        System.out.println("Purchase ID : "+arr[0]);
-        System.out.println("**************************************************************************************************************");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("*****************************************");
+        System.out.println("      Date : "+arr[5]);
+        System.out.println("      Purchase ID : "+arr[0]);
+        System.out.println("*****************************************");
         String[] orderAmount = arr[1].split("|");
         int sumprice = 0; 
         for (int i = 0; i < orderAmount.length; i++) {
@@ -67,11 +77,13 @@ public class Receipt {
            sumprice += dessert.price*amount;
            System.out.println((i+1)+". "+dessert.dessertName+" Amount: "+amount+" Price: "+(dessert.price*amount));
         }
-        System.out.println("**************************************************************************************************************");
-        System.out.println("Sub Total : "+sumprice);
-        System.out.println("Tex       : 0");
-        System.out.println("Order Total :"+sumprice);
-        System.out.println("**************************************************************************************************************");
+        System.out.println("*****************************************");
+        System.out.println("      Sub Total : "+sumprice);
+        System.out.println("      Tex       : 0");
+        System.out.println("      Order Total :"+sumprice);
+        System.out.println("*****************************************");
+        System.out.print("Press Enter to continue...");
+        scanner.nextLine(); // Wait for the user to press Enter
     }
 
     public static void addReceipt(String dataOrder,int sumprice){

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Dessert {
     int dessertId;
@@ -9,7 +10,7 @@ public class Dessert {
     String expirationDate;
     String createDate;
 
-    static String[][] dataArrayDessert = {{"0","Khanom Krok","","25","5","0,1","2022-10-10","2022-10-10"}};
+    static String[][] dataArrayDessert = {{"0","Khanom Krok","","25","5","0:1","2022-10-10","2022-10-10"}};
 
 
     Dessert(){
@@ -44,8 +45,25 @@ public class Dessert {
         return this.price;
     }
 
+    public static void addDessert(String[] arrayDessert){
+        int mostId = Integer.parseInt(dataArrayDessert[dataArrayDessert.length-1][0]);
+        String[][] newArray2D = addRow(dataArrayDessert, arrayDessert);
+        dataArrayDessert = newArray2D;
+        System.out.println(Arrays.toString(dataArrayDessert));
+    }
+
+    static void getListItemDessert(){
+        for(int i=0;i<dataArrayDessert.length;i++){
+                System.out.print("ID: "+dataArrayDessert[i][0]+", Name: "+dataArrayDessert[i][1]+", Price: "+dataArrayDessert[i][3]+", Stock: "+dataArrayDessert[i][4]+
+                ", Expiration Date: "+dataArrayDessert[i][6]+"\n");
+
+                
+
+        }
+    }
+
     private Material[] setUpArrayMaterials(String materialsString) {
-        String[] idMaterials2 = materialsString.split(",");
+        String[] idMaterials2 = materialsString.split(":");
         Material[] Array = new Material[idMaterials2.length];
 
         for(int i=0; i<Array.length; i++){
@@ -54,12 +72,23 @@ public class Dessert {
         return Array;
     }
 
-    static void getListItemDessert(){
-        for(int i=0;i<dataArrayDessert.length;i++){
-                System.out.print("ID: "+dataArrayDessert[i][0]+", Name: "+dataArrayDessert[i][1]+", Price: "+dataArrayDessert[i][3]+", Stock: "+dataArrayDessert[i][4]+
-                ", Expiration Date: "+dataArrayDessert[i][6]);
-                
+    
 
+    /// แอดข้อมูลเข้าอาเรย์ 1 แถว
+    public static String[][] addRow(String[][] originalArray, String[] newRow) {
+        int numRows = originalArray.length;
+        int numCols = originalArray[0].length;
+
+        String[][] newArray = new String[numRows + 1][numCols];
+
+        // Copy existing data
+        for (int i = 0; i < numRows; i++) {
+            System.arraycopy(originalArray[i], 0, newArray[i], 0, numCols);
         }
+
+        // Add the new row
+        System.arraycopy(newRow, 0, newArray[numRows], 0, numCols);
+
+        return newArray;
     }
 }
