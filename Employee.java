@@ -103,7 +103,44 @@ public class Employee extends User {
     }
 
     private static void toMaterialsMode() {
+        while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Materials Manangement:");
+            System.out.println("1. Fetch Materials");
+            System.out.println("2. Add Material");
+            System.out.println("3. Edit Material");
+            System.out.println("4. Delete Material");
+            System.out.println("5. Exit");
+            System.out.println();
+            System.out.print("Select an option: ");
 
+            int choiceMenu = scanner.nextInt();
+
+            switch (choiceMenu) {
+                case 1:
+                    fetchMaterial();
+                    break;
+                case 2:
+                    addMaterials();
+                    break;
+                case 3:
+                    editMaterials();
+                    break;
+                case 4:
+                    deleteMaterials();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
     }
 
     private static void toOrderMode() {
@@ -471,4 +508,70 @@ public class Employee extends User {
         }
 
     }
+
+    /////// funtion material
+    private static void fetchMaterial(){
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        Material.getListMaterials();
+        System.out.print(" press Enter to continue...");
+        scanner.nextLine();
+    }
+
+    private static void addMaterials(){
+        Material mat = new Material();
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Add Meterial");
+        Scanner scanner = new Scanner(System.in);
+        int materialId = Integer.parseInt(mat.dataMaterials[mat.dataMaterials.length-1][0]+1);
+
+        System.out.print("Material Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Stock Material: ");
+        int stockMaterial = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        System.out.print("Create Date (YYYY-MM-DD): ");
+        String createDate = scanner.nextLine();
+        String[] newMaterial = {
+            String.valueOf(materialId),
+            name,
+            String.valueOf(stockMaterial),
+            createDate
+        };
+        Material.addMaterial(newMaterial);
+    }
+
+    private static void editMaterials(){
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        Material.getListMaterials();
+        System.out.print("Enter Material ID to update: ");
+        String materialId = scanner.nextLine();
+        Material.setMaterialId(materialId );
+    }
+
+    private static void deleteMaterials(){
+        Scanner scanner = new Scanner(System.in);
+
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        Material.getListMaterials();
+        System.out.print("Enter Material ID to delete: ");
+        String materialId = scanner.nextLine();
+
+        Material.deleteMaterial(materialId);
+    }
+
 }
