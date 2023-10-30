@@ -574,4 +574,9 @@ public class Employee extends User {
         Material.deleteMaterial(materialId);
     }
 
+    private static void notifyMaterial(){
+        Scanner scanner = new Scanner(System.in);
+        Material.addNotifyMaterial(scanner);
+    }
+
 }

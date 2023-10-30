@@ -10,6 +10,10 @@ public class Material {
         {"0","Coconut Milk","5","2023-10-10"},
         {"1","Panda Leaf","5","2023-10-10"}
 };
+
+    static String[][] notifyMaterials = {
+        {"0","0" ,"2023-12-12"}  //Idnotify //IdMatorial //
+    };
     
 
     Material(int idMaterials){
@@ -131,5 +135,36 @@ public class Material {
             return newArray;
         }
         return array;
+    }
+
+    public static void addNotifyMaterial(Scanner scanner) {
+        String notifyId = notifyMaterials[notifyMaterials.length-1][0];
+        getListMaterials();
+        System.out.print("Enter Material ID: ");
+        String materialId = scanner.nextLine();
+
+        System.out.print("Enter Notification Date (YYYY-MM-DD): ");
+        String notificationDate = scanner.nextLine();
+
+        String[] newNotifyMaterial = {notifyId, materialId, notificationDate};
+
+        // Calculate the new length of the notifyMaterials array
+        int newLength = notifyMaterials.length + 1;
+
+        // Create a new array with the updated length
+        String[][] newNotifyMaterials = new String[newLength][];
+        
+        // Copy the old notifyMaterials into the new array
+        for (int i = 0; i < notifyMaterials.length; i++) {
+            newNotifyMaterials[i] = notifyMaterials[i];
+        }
+        
+        // Add the new notify material to the end of the new array
+        newNotifyMaterials[newLength - 1] = newNotifyMaterial;
+
+        // Update the notifyMaterials reference
+        notifyMaterials = newNotifyMaterials;
+
+        System.out.println("Notify Material added successfully.");
     }
 }
