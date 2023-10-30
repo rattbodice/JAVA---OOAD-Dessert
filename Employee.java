@@ -248,8 +248,7 @@ public class Employee extends User {
         int[] stockIdSelect = new int[10];
         int countSelect = 0;
         Dessert dessert = new Dessert();
-        String mostId = dessert.dataArrayDessert[dessert.dataArrayDessert.length-1][0];
-
+        String mostId = dessert.dataArrayDessert[dessert.dataArrayDessert.length - 1][0];
 
         while (true) {
             for (int i = 0; i < 10; i++) {
@@ -269,7 +268,7 @@ public class Employee extends User {
             System.out.print("Dessert Stock : ");
             dessertStock = scanner.nextLine();
             System.out.println("Materials of Dessert");
-            int choice=99;
+            int choice = 99;
             while (true) {
                 for (int i = 0; i < dataMaterials.length; i++) {
 
@@ -282,18 +281,18 @@ public class Employee extends User {
                 System.out.println();
                 try {
                     System.out.print("Please input ID of Material : ");
-                    if (choice != 99){
-                        dessertMat+=":";
-                    } 
+                    if (choice != 99) {
+                        dessertMat += ":";
+                    }
                     choice = scanner.nextInt();
-                    
+
                     stockIdSelect[countSelect] = choice;
                     dessertMat += choice;
-                    
+
                     countSelect++;
-                    
+
                 } catch (Exception e) {
-                    System.out.println("Invalid input. Please enter a valid ID."+e);
+                    System.out.println("Invalid input. Please enter a valid ID." + e);
                 }
                 System.out.println("----------------------------------");
                 System.out.print("Dessert Materials : ");
@@ -309,6 +308,109 @@ public class Employee extends User {
                         }
                     }
 
+                }
+
+                System.out.println("\n1 : Have more");
+                System.out.println("2 : Complete");
+                System.out.print("Select an option:");
+                int choice2 = scanner.nextInt();
+
+                switch (choice2) {
+                    case 1:
+                        dessertMat += ":";
+                        continue;
+                    case 2:
+                        String[] newDessert = { mostId, dessertName, dessertDes, dessertPrice, dessertStock, dessertMat,
+                                dessertExpi, dessertExpi };
+                        Dessert.addDessert(newDessert);
+                        return;
+
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+
+            }
+
+        }
+
+    }
+
+    private static void editDessert() {
+        Scanner scanner = new Scanner(System.in);
+        int idSelect;
+        Dessert dessert = new Dessert();
+        String nameDes, descripDes, priceDes, stockDes, dessertMat = "";
+        Material mat = new Material();
+        String[][] dataMaterials = mat.dataMaterials;
+        int[] stockIdSelect = new int[10];
+        int countSelect = 0;
+
+        while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
+            System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Edit Dessert");
+            Dessert.getListItemDessert();
+            System.out.print("Please input ID do you want to edit : ");
+            idSelect = scanner.nextInt();
+            Dessert oldDessert = new Dessert(idSelect);
+            System.out.println("Old Dessert Name : " + oldDessert.dessertName);
+            System.out.print("New Dessert Name : ");
+            scanner.nextLine(); // Consume the newline
+            nameDes = scanner.nextLine();
+            System.out.println("Old Dessert Description : ");
+            System.out.print("New Dessert Description : ");
+            descripDes = scanner.nextLine();
+            System.out.println("Old Dessert Price : " + oldDessert.price);
+            System.out.print("New Dessert Price : ");
+            priceDes = scanner.nextLine();
+            System.out.println("Old Dessert Stock : " + oldDessert.stockDessert);
+            System.out.print("New Dessert Stock : ");
+            stockDes = scanner.nextLine();
+
+            int choice = 99;
+            while (true) {
+                System.out.print("Old Dessert Materials : ");
+                oldDessert.getMaterials();
+                for (int i = 0; i < dataMaterials.length; i++) {
+
+                    System.out.print("ID : " + dataMaterials[i][0]);
+                    System.out.print(" , Name : " + dataMaterials[i][1]);
+                    System.out.print(" , Stock : " + dataMaterials[i][2]);
+
+                    System.out.println();
+                }
+                System.out.println();
+                try {
+                    System.out.print("Please input ID of Material : ");
+                    if (choice != 99) {
+                        dessertMat += ":";
+                    }
+                    choice = scanner.nextInt();
+
+                    stockIdSelect[countSelect] = choice;
+                    dessertMat += choice;
+
+                    countSelect++;
+
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Please enter a valid ID." + e);
+                }
+                System.out.println("----------------------------------");
+                System.out.print("Dessert Materials : ");
+
+                for (int j = 0; j < countSelect; j++) {
+                    for (int k = 0; k < dataMaterials.length; k++) {
+                        if (Integer.parseInt(dataMaterials[k][0]) == stockIdSelect[j]) {
+                            if (j != 0) {
+                                System.out.print(",");
+                            }
+                            System.out.print(dataMaterials[k][1]);
+
+                        }
+                    }
 
                 }
 
@@ -322,26 +424,51 @@ public class Employee extends User {
                         dessertMat += ":";
                         continue;
                     case 2:
-                        String[] newDessert = {mostId,dessertName,dessertDes,dessertPrice,dessertStock,dessertMat,dessertExpi,dessertExpi};
-                        Dessert.addDessert(newDessert);
+                        String[] arrayNewDessert = { Integer.toString(oldDessert.dessertId), nameDes, descripDes,
+                                priceDes, stockDes, dessertMat, oldDessert.expirationDate, oldDessert.expirationDate };
+                        dessert.setDessert(arrayNewDessert, oldDessert.dessertId);
                         return;
 
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
-                
 
             }
-
         }
 
     }
 
-    private static void editDessert() {
-
-    }
-
     private static void deleteDessert() {
+        Scanner scanner = new Scanner(System.in);
+        Dessert dessert = new Dessert();
+        int idSelect = 99;
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        while (true) {
+            System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Delete dessert");
+            Dessert.getListItemDessert();
+            System.out.print("\n Please input ID do you want to delete : ");
+            idSelect = scanner.nextInt();
+            System.out.println("Are you want to delete ID " + idSelect + " ?");
+            System.out.println("1: Yes");
+            System.out.println("2: No");
+            System.out.print("Select an option:");
+            int choice2 = scanner.nextInt();
+            switch (choice2) {
+                case 1:
+                dessert.deleteDessert(idSelect);
+                    return;
+                case 2:
+
+                    continue;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
 
     }
 }

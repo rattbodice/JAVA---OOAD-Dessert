@@ -6,7 +6,7 @@ public class Dessert {
     String describeDessert;
     int price;
     int stockDessert;
-    Material[] material;
+    static Material[] material;
     String expirationDate;
     String createDate;
 
@@ -52,6 +52,15 @@ public class Dessert {
         System.out.println(Arrays.toString(dataArrayDessert));
     }
 
+    public static void setDessert(String[] newDessert,int id){
+        dataArrayDessert[id] = newDessert;
+    }
+    
+    static void deleteDessert(int id){
+        String[][] updateArray = deleteRowById(dataArrayDessert, id);
+        dataArrayDessert = updateArray;
+    }
+
     static void getListItemDessert(){
         for(int i=0;i<dataArrayDessert.length;i++){
                 System.out.print("ID: "+dataArrayDessert[i][0]+", Name: "+dataArrayDessert[i][1]+", Price: "+dataArrayDessert[i][3]+", Stock: "+dataArrayDessert[i][4]+
@@ -60,6 +69,14 @@ public class Dessert {
                 
 
         }
+    }
+
+    static void getMaterials(){
+        for (int i = 0; i < material.length; i++) {
+            if (i!=0) System.out.print(","); 
+            System.out.print(material[i].name);
+        }
+        System.out.println();
     }
 
     private Material[] setUpArrayMaterials(String materialsString) {
@@ -72,7 +89,34 @@ public class Dessert {
         return Array;
     }
 
-    
+    // ลบข้อมูลแถว
+    public static String[][] deleteRowById(String[][] dataArray, int id) {
+        int rows = dataArray.length;
+        int cols = dataArray[0].length;
+        
+        // Count the number of rows that won't be deleted
+        int count = 0;
+        for (int i = 0; i < rows; i++) {
+            if (!dataArray[i][0].equals(Integer.toString(id))) {
+                count++;
+            }
+        }
+        
+        // Create a new array with the rows that are not deleted
+        String[][] newArray = new String[count][cols];
+        int newIndex = 0;
+        
+        for (int i = 0; i < rows; i++) {
+            if (!dataArray[i][0].equals(Integer.toString(id))) {
+                for (int j = 0; j < cols; j++) {
+                    newArray[newIndex][j] = dataArray[i][j];
+                }
+                newIndex++;
+            }
+        }
+        
+        return newArray;
+    }
 
     /// แอดข้อมูลเข้าอาเรย์ 1 แถว
     public static String[][] addRow(String[][] originalArray, String[] newRow) {
