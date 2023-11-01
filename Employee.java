@@ -331,7 +331,7 @@ public class Employee extends User {
             orderToString = "" + mostId + "," + "88" + ",";
             for (int i = 0; i < amountSelect; i++) {
                 if (i != 0) {
-                    orderToString = orderToString + "\\|";
+                    orderToString = orderToString + "|";
                 }
                 orderToString = orderToString + orderDessert[i].dessertId + ":" + amountOrderDessert[i];
             }

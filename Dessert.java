@@ -10,7 +10,7 @@ public class Dessert {
     String expirationDate;
     String createDate;
 
-    static String[][] dataArrayDessert = {{"0","Khanom Krok","","25","5","0:1","2022-10-10","2022-10-10"}};
+    static String[][] dataArrayDessert = {{"0","Khanom Krok","","25","5","0:1","2022-10-10","2022-10-10"},{"1","Khanom Babin","","15","11","0:1","2022-10-10","2022-10-10"}};
 
 
     Dessert(){

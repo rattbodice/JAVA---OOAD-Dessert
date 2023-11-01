@@ -49,12 +49,7 @@ public class Order {
         String[][] newArray2D = addRow(dataOrder, arrOrder);
         /// เพิ่ม order ใหม่เข้าไปในข้อมูล
         dataOrder = newArray2D;
-        if (arrOrder[(arrOrder.length) - 2].equals("Online")) {
-            /// เพิ่มใบเสร็จ ส่ง ข้อมูลออเดอร์ กับ ราคารวมเข้าไป
-            int sumprice = Integer.parseInt(dataOrder[dataOrder.length - 1][4]);
-            Receipt.addReceipt(dataOrder[dataOrder.length - 1][2], sumprice);
-            Receipt.printReceipt();
-        }
+        
         System.out.println(order);
     }
 
