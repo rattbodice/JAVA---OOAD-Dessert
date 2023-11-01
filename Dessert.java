@@ -36,6 +36,9 @@ public class Dessert {
     public String getName(){
         return this.dessertName;
     }
+    public String getDescribeDessert(){
+        return this.describeDessert;
+    }
 
     public int getStockDessert(){
         return this.stockDessert;
@@ -44,6 +47,17 @@ public class Dessert {
     public int getPrice(){
         return this.price;
     }
+    public void setName(String dessertName2){
+        dessertName = dessertName2;
+    }
+    public void setDescribeDessert(String describeDesssert2){
+        describeDessert = describeDesssert2;
+    }
+    public void setStockDessert(Integer stockDessert2){
+        stockDessert = stockDessert2;
+    }
+    
+    
 
     public static void addDessert(String[] arrayDessert){
         int mostId = Integer.parseInt(dataArrayDessert[dataArrayDessert.length-1][0]);

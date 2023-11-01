@@ -15,5 +15,11 @@ public class BasketShop {
         this.price = Float.parseFloat(dataBasket[3]);
         this.quanlity = Integer.parseInt(dataBasket[4]);
     }
+    public Dessert[] getListDressert(){
+        return dessert;
+    }
+    public Dessert[] setListDressert(Dessert[] dessert2){
+        return dessert = dessert2;
+    }
     
 }

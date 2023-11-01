@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 public class User {
-    int userId;
+    static int userId;
     static String fname;
     static String lname;
     static String username;

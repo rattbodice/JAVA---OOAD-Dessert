@@ -23,8 +23,7 @@ public class Employee extends User {
             System.out.println("1. Dessert");
             System.out.println("2. Materials");
             System.out.println("3. Order");
-            System.out.println("4. Receipt");
-            System.out.println("5. Exit");
+            System.out.println("4. Exit");
             System.out.print("Select an option: ");
 
             int choice = scanner.nextInt();
@@ -40,9 +39,6 @@ public class Employee extends User {
                     toOrderMode();
                     break;
                 case 4:
-                    toReceiptMode();
-                    break;
-                case 5:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -57,6 +53,45 @@ public class Employee extends User {
 
     public static int getLevel() {
         return level;
+    }
+
+    public static int getEmployeeId() {
+        return userId;
+    }
+
+    public static String getName() {
+        return fname + lname;
+    }
+
+    public static String getUserName() {
+        return username;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public static Date getCreateDate() {
+        return createDate;
+    }
+
+    public static void setName(String name2) {
+    }
+    public static void setUsername(String username2){
+        username = username2;
+    }
+    public static void setPassword(String password2){
+        password = password2;
+    }
+    public static void setEmail(String email2){
+        email = email2;
+    }
+    public static void setCreateDate(Date createDate2){
+        createDate = createDate2;
     }
 
     //////////////////////////////// InterfaceZone
@@ -115,7 +150,8 @@ public class Employee extends User {
             System.out.println("2. Add Material");
             System.out.println("3. Edit Material");
             System.out.println("4. Delete Material");
-            System.out.println("5. Exit");
+            System.out.println("5. Notyfy empty material");
+            System.out.println("6. Exit");
             System.out.println();
             System.out.print("Select an option: ");
 
@@ -135,6 +171,9 @@ public class Employee extends User {
                     deleteMaterials();
                     break;
                 case 5:
+                    notifyMaterial();
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -144,7 +183,40 @@ public class Employee extends User {
     }
 
     private static void toOrderMode() {
+        while (true) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println();
+            }
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(
+                    "--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Orders Manangement:");
+            System.out.println("1. Fetch Order");
+            System.out.println("2. Finish Order");
+            System.out.println("3. Print receipt order");
+            System.out.println("4. Exit");
+            System.out.println();
+            System.out.print("Select an option: ");
 
+            int choiceMenu = scanner.nextInt();
+
+            switch (choiceMenu) {
+                case 1:
+                    fetchOrder();
+                    break;
+                case 2:
+                    finisheOrder();
+                    break;
+                case 3:
+                    printReceipt();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
     }
 
     private static void toReceiptMode() {
@@ -259,11 +331,11 @@ public class Employee extends User {
             orderToString = "" + mostId + "," + "88" + ",";
             for (int i = 0; i < amountSelect; i++) {
                 if (i != 0) {
-                    orderToString = orderToString + "|";
+                    orderToString = orderToString + "\\|";
                 }
                 orderToString = orderToString + orderDessert[i].dessertId + ":" + amountOrderDessert[i];
             }
-            orderToString = orderToString + "," + "Front Shop" + "," + sumprice + "," + "Offline";
+            orderToString = orderToString + "," + "Front Shop" + "," + sumprice + "," + "Offline" + "," + "Finished";
             order.addListOrder(orderToString);
 
             return;
@@ -285,7 +357,7 @@ public class Employee extends User {
         int[] stockIdSelect = new int[10];
         int countSelect = 0;
         Dessert dessert = new Dessert();
-        String mostId = dessert.dataArrayDessert[dessert.dataArrayDessert.length - 1][0];
+        String mostId = dessert.dataArrayDessert[dessert.dataArrayDessert.length - 1][0] + 1;
 
         while (true) {
             for (int i = 0; i < 10; i++) {
@@ -496,7 +568,7 @@ public class Employee extends User {
             int choice2 = scanner.nextInt();
             switch (choice2) {
                 case 1:
-                dessert.deleteDessert(idSelect);
+                    dessert.deleteDessert(idSelect);
                     return;
                 case 2:
 
@@ -510,7 +582,7 @@ public class Employee extends User {
     }
 
     /////// funtion material
-    private static void fetchMaterial(){
+    private static void fetchMaterial() {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < 10; i++) {
             System.out.println();
@@ -520,16 +592,16 @@ public class Employee extends User {
         scanner.nextLine();
     }
 
-    private static void addMaterials(){
+    private static void addMaterials() {
         Material mat = new Material();
         for (int i = 0; i < 10; i++) {
             System.out.println();
         }
         System.out.println(
-                    "--------------------------------------------------------------------------------------------------------------");
-            System.out.println("Add Meterial");
+                "--------------------------------------------------------------------------------------------------------------");
+        System.out.println("Add Meterial");
         Scanner scanner = new Scanner(System.in);
-        int materialId = Integer.parseInt(mat.dataMaterials[mat.dataMaterials.length-1][0]+1);
+        int materialId = Integer.parseInt(mat.dataMaterials[mat.dataMaterials.length - 1][0] + 1);
 
         System.out.print("Material Name: ");
         String name = scanner.nextLine();
@@ -541,15 +613,15 @@ public class Employee extends User {
         System.out.print("Create Date (YYYY-MM-DD): ");
         String createDate = scanner.nextLine();
         String[] newMaterial = {
-            String.valueOf(materialId),
-            name,
-            String.valueOf(stockMaterial),
-            createDate
+                String.valueOf(materialId),
+                name,
+                String.valueOf(stockMaterial),
+                createDate
         };
         Material.addMaterial(newMaterial);
     }
 
-    private static void editMaterials(){
+    private static void editMaterials() {
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < 10; i++) {
             System.out.println();
@@ -557,12 +629,11 @@ public class Employee extends User {
         Material.getListMaterials();
         System.out.print("Enter Material ID to update: ");
         String materialId = scanner.nextLine();
-        Material.setMaterialId(materialId );
+        Material.setMaterialId(materialId);
     }
 
-    private static void deleteMaterials(){
+    private static void deleteMaterials() {
         Scanner scanner = new Scanner(System.in);
-
 
         for (int i = 0; i < 10; i++) {
             System.out.println();
@@ -574,9 +645,59 @@ public class Employee extends User {
         Material.deleteMaterial(materialId);
     }
 
-    private static void notifyMaterial(){
+    private static void notifyMaterial() {
         Scanner scanner = new Scanner(System.in);
         Material.addNotifyMaterial(scanner);
+    }
+
+    //// Order Zone
+    private static void fetchOrder() {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        Order.getListOrder(1);
+        System.out.print(" press Enter to continue...");
+        scanner.nextLine();
+    }
+
+    private static void finisheOrder() {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        Order.getListOrder(3);
+        System.out.print("Input ID order to finish status : ");
+        int idOrder = scanner.nextInt();
+        System.out.println("Are you sure to finish this order id " + idOrder);
+        System.out.println("1.Yes");
+        System.out.println("2.No");
+        System.out.print("Select an option:");
+        int choice2 = scanner.nextInt();
+
+        switch (choice2) {
+            case 1:
+                Order.setStatusOrder(idOrder);
+                break;
+            case 2:
+                return;
+
+            default:
+                break;
+        }
+
+    }
+
+    private static void printReceipt() {
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+        Receipt.fetchReceipt();
+        System.out.print("Enter Order ID to print receipt: ");
+        int materialId = scanner.nextInt();
+        Receipt.printReceipt(materialId);
     }
 
 }
