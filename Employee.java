@@ -357,7 +357,7 @@ public class Employee extends User {
         int[] stockIdSelect = new int[10];
         int countSelect = 0;
         Dessert dessert = new Dessert();
-        String mostId = dessert.dataArrayDessert[dessert.dataArrayDessert.length - 1][0] + 1;
+        String mostId = Integer.toString(Integer.parseInt(dessert.dataArrayDessert[dessert.dataArrayDessert.length - 1][0]) + 1);
 
         while (true) {
             for (int i = 0; i < 10; i++) {

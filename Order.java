@@ -9,8 +9,7 @@ public class Order {
     String typeOrder = "Offline";
     String status = "Not Finish";
 
-    static String[][] dataOrder = { { "0", "88", "0:3", "Client love this", "30", "Offline", "Not Finished" },
-            { "1", "88", "0:3|0:3", "Client love this", "30", "Offline", "Not Finished" } };
+    static String[][] dataOrder = { { "0", "88", "0:3", "Client love this", "30", "Offline", "Not Finished" },};
 
     Order(int orderId) {
         String[] arrayDataOrder = dataOrder[orderId];
@@ -57,7 +56,7 @@ public class Order {
         if (choice == 1) {
             for (int i = 0; i < dataOrder.length; i++) {
 
-                System.out.print("ID: " + dataOrder[i][0] + ", Dessert: ");
+                
                     System.out.print("ID: " + dataOrder[i][0] + ", Dessert: ");
                     String[] array = dataOrder[i][2].split("\\|");
                     for (int h = 0; h < array.length; h++) {

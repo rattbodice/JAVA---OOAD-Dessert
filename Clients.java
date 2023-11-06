@@ -14,6 +14,7 @@ public class Clients extends User{
                 System.out.println();
             }
             System.out.println("-------------------------------------------------------");
+            System.out.println("                         On : 5.00 AM - 9.00 AM |Close all monday and sunday :)");
             System.out.println("Menu:");
             System.out.println("1. Dessert");
             System.out.println("2. Exit");
